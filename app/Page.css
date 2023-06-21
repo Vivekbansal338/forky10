@@ -1,0 +1,152 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.hero {
+  background-image: url("../assets/Images/hero3.jpeg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.hero-content {
+  text-align: center;
+  color: #fff;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-content button {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.discount {
+  background-color: #f5f5f5;
+  padding: 2rem;
+  text-align: center;
+}
+
+.discount h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.trending {
+  text-align: center;
+}
+
+.trending h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.trending-items {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.trending-item {
+  text-align: center;
+}
+
+.trending-item img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.trending-item h3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.recommendations {
+  text-align: center;
+}
+
+.recommendations h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.recommendation-items {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.recommendation-item {
+  text-align: center;
+}
+
+.recommendation-item img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.recommendation-item h3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.popular {
+  text-align: center;
+}
+
+.popular h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.popular-items {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.popular-item {
+  text-align: center;
+}
+
+.popular-item img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.popular-item h3 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}

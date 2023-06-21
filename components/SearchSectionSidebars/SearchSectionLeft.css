@@ -1,0 +1,48 @@
+.searchsectionleftsidebar {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 10px;
+  color: black;
+}
+
+.title_left_sidesection {
+  font-size: 2rem;
+  font-weight: bold;
+  /* color: #fff; */
+  color: black;
+}
+
+.filteroptions {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filteroptions li {
+  cursor: pointer;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+  color: black;
+}
+
+.filteroptions li:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.filteroptions li.selected {
+  background-color: #fff;
+  color: black;
+}
+
+.filteroptions li.selected:hover {
+  transform: scale(1.1);
+}

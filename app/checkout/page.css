@@ -1,0 +1,170 @@
+.checkout_container {
+  background-color: #333333;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.order_container,
+.discount_container,
+.delivery_container,
+.payment_container,
+.placeorder_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: black;
+  border: #fff 1px solid;
+  padding: 20px;
+  border-radius: 20px;
+}
+.container_title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.container_title h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 2rem;
+  font-size: bold;
+}
+.container_title button {
+  background-color: #fff;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: 700;
+  border: #fff 1px solid;
+}
+
+.container_title button:hover {
+  background-color: #000;
+  color: #fff;
+  border: #fff 1px solid;
+  cursor: pointer;
+}
+
+.order_container_items,
+.delivery_container_items,
+.payment_container_items,
+.discount_container_items,
+.placeorder_container_items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeorder-card-label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.placeorder-card-content p {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.placeorder-card-content p span {
+  font-size: 18px;
+  margin-right: 10px;
+  color: #000;
+}
+
+.placeorder-card-total {
+  font-weight: bold;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.placeorder-card-total span {
+  font-size: 18px;
+  margin-right: 10px;
+  color: #000;
+}
+
+.placeorder-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+.placeorder-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.placeorder-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.placeorder-card-content p {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.placeorder-card-total {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.placeorder-card-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 20px;
+  border: #000 1px solid;
+}
+
+.placeorder-card-button:hover {
+  background-color: #fff;
+  color: #000;
+  border: #000 1px solid;
+  font-weight: bold;
+}
+
+.empty {
+  font-size: 2rem;
+}

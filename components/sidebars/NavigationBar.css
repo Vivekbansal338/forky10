@@ -1,0 +1,66 @@
+.navigationbar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 300px;
+  background-color: black;
+  z-index: 9999;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.5s ease-in-out;
+  font-size: 2rem;
+}
+.navigationbar-overlay button {
+  margin-bottom: 3rem;
+  color: #fff;
+  background-color: black;
+  border: 0;
+  align-self: flex-end;
+  font-size: 20px;
+}
+.navigationbar-overlay button:hover {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.navigationbar-overlay ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigationbar-overlay li {
+  margin-bottom: 10px;
+}
+.navigationbar-overlay li:hover {
+  cursor: pointer;
+}
+
+.navigationbar-overlay a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navigationbar-overlay a:hover {
+  color: #ccc;
+  cursor: pointer;
+}
+
+.navigationbar-overlay span {
+  margin-left: 10px;
+}
+
+.hidden {
+  display: none;
+}

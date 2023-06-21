@@ -1,0 +1,23 @@
+.initial_message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: large;
+  gap: 1rem;
+}
+
+.initial_message img {
+  border-radius: 50px;
+  height: 50vh;
+  width: auto;
+  transition: all 1s ease;
+}
+.initial_message img:hover {
+  transform: scale(1.05);
+}
+
+.initial_message_hidden {
+  display: none;
+}

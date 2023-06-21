@@ -1,0 +1,40 @@
+.hero_recipe_detail_ingredients {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  /* background-color: aliceblue; */
+}
+
+.hero_recipe_detail_ingredients h2 {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Recipe_ingredents_list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-gap: 2rem;
+}
+
+.Recipe_ingredents_list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.Recipe_ingredents_list li .icon {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.Recipe_ingredents_list li p {
+  font-size: 18px;
+  margin: 0;
+}

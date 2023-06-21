@@ -1,0 +1,31 @@
+.mainbody {
+  display: flex;
+  gap: 20px;
+  /* background-color: black; */
+  background-color: #333333;
+  padding: 1rem 0rem;
+}
+
+.sidebarleft {
+  /* background-color: antiquewhite; */
+  border-radius: 0px 20px 20px 0px;
+  flex: 1;
+  border: #fff solid 1px;
+  background-color: black;
+}
+
+.sidebarright {
+  /* background-color: aqua; */
+  border-radius: 20px 0px 0px 20px;
+  flex: 1;
+  border: #fff solid 1px;
+  background-color: black;
+}
+
+.middle {
+  /* background-color: aquamarine; */
+  flex: 3;
+  /* border: #fff solid 1px; */
+  border-radius: 20px;
+  /* background-color: black; */
+}

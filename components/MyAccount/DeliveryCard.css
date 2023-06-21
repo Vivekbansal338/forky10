@@ -1,0 +1,56 @@
+.deliverycard {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  /* background-color: black; */
+  background-color: #fff;
+  color: black;
+  font-size: 1.8rem;
+  padding: 2rem;
+  border-radius: 20px;
+  gap: 10px;
+  border: #fff solid 1px;
+  transition: all 0.5s ease;
+}
+
+.deliverycard:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.deliverycard-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.deliverycard-content {
+  font-size: 18px;
+}
+
+.address-line {
+  margin-bottom: 8px;
+}
+
+.deliverycardbutton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.deliverycardbutton button {
+  background-color: black;
+  color: #fff;
+  border: #fff solid 1px;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+
+.deliverycardbutton button:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.abcdselected {
+  background-color: #f5f5f5;
+  color: black;
+}

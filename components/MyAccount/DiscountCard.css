@@ -1,0 +1,73 @@
+.coupon-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 230px;
+}
+
+/* Styles for the coupon details section */
+.coupon-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.coupon-code {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.coupon-discount {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #e83c3c;
+  text-shadow: 2px 2px #000;
+}
+
+.coupon-max-discount,
+.coupon-min-amount,
+.coupon-expiration {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Styles for the apply button */
+.apply-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.apply-button:hover {
+  background-color: #fff;
+  color: #000;
+  border: #000 1px solid;
+  font-weight: bold;
+  text-shadow: 1px 1px #000;
+}
+
+.apply-button.disabled {
+  cursor: not-allowed;
+}
+
+.selected {
+  background-color: black;
+  color: #fff;
+  border: #fff solid 1px;
+}

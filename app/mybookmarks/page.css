@@ -1,0 +1,67 @@
+.mybookmark_container {
+  background-color: black;
+  /* background-color: #333333; */
+  border: #fff 1px solid;
+  /* padding: 20px; */
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.container_title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+}
+
+.container_title h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-left: 2rem;
+  font-size: bold;
+}
+.container_title button {
+  background-color: #fff;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: 700;
+  border: #fff 1px solid;
+}
+
+.container_title button:hover {
+  background-color: #000;
+  color: #fff;
+  border: #fff 1px solid;
+  cursor: pointer;
+}
+
+.mybookmark_container_items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.nobookmark {
+  font-size: 3rem;
+}

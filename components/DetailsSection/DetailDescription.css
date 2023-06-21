@@ -1,0 +1,31 @@
+.detail-description {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  /* margin-bottom: 20px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail-description__title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.detail-description__publisher {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.detail-description__price {
+  background-color: #fff;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+}

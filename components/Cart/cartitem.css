@@ -1,0 +1,90 @@
+.cartitem {
+  width: 300px;
+  display: flex;
+  background-color: black;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: #fff solid 1px;
+  overflow: hidden;
+  min-height: 110px;
+}
+
+.cartitem-image {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+.cartitem-image:hover {
+  cursor: pointer;
+}
+
+.recipe_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  width: 100px;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+}
+.recipe_image:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.cartitem-details {
+  flex: 3;
+  margin-left: 10px;
+  max-width: 200px;
+  padding: 10px 10px 10px 0px;
+}
+
+.recipe_title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.recipe_title:hover {
+  cursor: pointer;
+}
+
+.cartitem-price {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.cartitem-quantity {
+  display: flex;
+  align-items: center;
+}
+
+.cartitem-button {
+  background-color: black;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  margin: 0 4px;
+}
+
+.cartitem-input {
+  width: 50px;
+  padding: 4px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  border: #fff solid 1px;
+}
+
+.cartitem-check {
+  font-size: 16px;
+  color: #0070f3;
+  cursor: pointer;
+}
+
+.plusminusicon {
+  font-size: 20px;
+}

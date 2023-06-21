@@ -1,0 +1,29 @@
+.detail-action {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.detail-action__button {
+  background-color: #fff;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: 700;
+  border: black 1px solid;
+}
+
+.detail-action__button:hover {
+  background-color: #000;
+  color: #fff;
+  border: #fff 1px solid;
+  cursor: pointer;
+}

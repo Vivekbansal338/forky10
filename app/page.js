@@ -1,95 +1,82 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import React from "react";
+import "./Page.css";
+import SearchIcons from "@/components/HomePage/Searchicons";
+import { useSelector } from "react-redux";
 
-export default function Home() {
+function Home() {
+  const searchitemsdata = useSelector((state) => state.searchitems.data);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="home">
+      <div className="hero">
+        <div className="hero-content">
+          <h1>Welcome to Food Recipes</h1>
+          <p>Discover delicious and healthy recipes for every occasion.</p>
+          <button>Get Started</button>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="discount">
+        <h2>Get 10% off your first order</h2>
+        <p>Use code FOOD10 at checkout</p>
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="trending">
+        <h2>Trending Recipes</h2>
+        <div className="trending-items">
+          <div className="trending-item">
+            <img src="pizza.jpg" alt="Pizza" />
+            <h3>Pizza</h3>
+          </div>
+          <div className="trending-item">
+            <img src="mango.jpg" alt="Mango" />
+            <h3>Mango Smoothie</h3>
+          </div>
+          <div className="trending-item">
+            <img src="apple.jpg" alt="Apple" />
+            <h3>Apple Pie</h3>
+          </div>
+        </div>
       </div>
-    </main>
-  )
+      <div className="recommendations">
+        <h2>Our Recommendations</h2>
+        <div className="recommendation-items">
+          <div className="recommendation-item">
+            <img src="salad.jpg" alt="Salad" />
+            <h3>Healthy Salad</h3>
+          </div>
+          <div className="recommendation-item">
+            <img src="smoothie.jpg" alt="Smoothie" />
+            <h3>Green Smoothie</h3>
+          </div>
+          <div className="recommendation-item">
+            <img src="soup.jpg" alt="Soup" />
+            <h3>Chicken Soup</h3>
+          </div>
+        </div>
+      </div>
+      <div className="popular">
+        <h2>Popular Recipes</h2>
+        <div className="popular-items">
+          <div className="popular-item">
+            <img src="pizza.jpg" alt="Pizza" />
+            <h3>Pizza</h3>
+          </div>
+          <div className="popular-item">
+            <img src="mango.jpg" alt="Mango" />
+            <h3>Mango Smoothie</h3>
+          </div>
+          <div className="popular-item">
+            <img src="apple.jpg" alt="Apple" />
+            <h3>Apple Pie</h3>
+          </div>
+        </div>
+      </div>
+      <SearchIcons
+        name="apple"
+        icon_url={"../assets/Vegetables/asparagus.png"}
+      />
+    </div>
+  );
 }
+
+export default Home;

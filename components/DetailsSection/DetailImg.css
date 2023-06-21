@@ -1,0 +1,18 @@
+.hero_recipe_detail_img_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero_recipe_detail_img {
+  max-width: 100rem;
+  max-height: 40rem;
+  border-radius: 1.5rem;
+  transition: all 1s ease;
+  min-width: 80rem;
+  min-height: 35rem;
+}
+
+.hero_recipe_detail_img:hover {
+  transform: scale(0.95);
+}

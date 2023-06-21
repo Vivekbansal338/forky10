@@ -1,0 +1,49 @@
+.hero_recipe_detail_cooking {
+  margin-top: 3rem;
+  font-size: 2rem;
+  color: #2d3748;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.hero_recipe_detail_cooking h2 {
+  margin-bottom: 2rem;
+}
+
+.hero_recipe_detail_cooking p {
+  margin-bottom: 2rem;
+}
+
+.Direction__button {
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  background: linear-gradient(
+    135deg,
+    #e7abcc,
+    #d9a1d3,
+    #c6a6d8,
+    #b1a9dc,
+    #a1a7de
+  );
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.Direction__button:hover {
+  background: linear-gradient(
+    135deg,
+    #f9d5e5,
+    #eeaccd,
+    #e39bbd,
+    #d881a6,
+    #c96f8f
+  );
+  transform: translateY(-0.5rem);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}

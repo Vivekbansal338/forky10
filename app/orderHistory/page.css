@@ -1,0 +1,60 @@
+.OrderHistory_container {
+  background-color: black;
+  padding: 20px;
+  border-radius: 20px;
+  border: #fff 1px solid;
+  min-height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background-color: black;
+}
+
+/* Style the table headers */
+th {
+  text-align: left;
+  font-weight: bold;
+  background-color: #fff;
+  color: black;
+  padding: 0.5rem;
+}
+
+/* Style the table rows */
+tr {
+  font-size: 10px;
+  border: #fff 1px solid;
+}
+
+/* Style the table cells */
+td {
+  padding: 0.5rem;
+}
+
+/* Style the delivery details and items lists */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Style the list items */
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Style the headings */
+h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}

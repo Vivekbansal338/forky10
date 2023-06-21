@@ -1,0 +1,19 @@
+.spent-analysis-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  min-height: 80vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
+.spent-analysis-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.chart-container {
+  margin-top: 20px;
+}
