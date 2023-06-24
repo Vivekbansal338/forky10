@@ -1,7 +1,7 @@
 // using useReducer and useEffect
 "use client";
 import React, { useReducer, useEffect, useState } from "react";
-import PasswordInfo from "@/Components/Login/PasswordInfo";
+import PasswordInfo from "@/components/Login/PasswordInfo";
 import {
   CheckEmailValidity,
   CheckPasswordValidity,
