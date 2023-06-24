@@ -1,8 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { cartActions } from "@/store/cart";
-import { orderHistoryActions } from "@/store/orderhistory";
 import Cartitem from "@/components/Cart/Cartitem";
 import DeliveryCard from "../../components/MyAccount/DeliveryCard";
 import DiscountCard from "../../components/MyAccount/DiscountCard";
