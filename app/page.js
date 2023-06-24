@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "@app/home.css";
+import "@/styles/home.css";
 import SearchIcons from "@/components/HomePage/Searchicons";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
