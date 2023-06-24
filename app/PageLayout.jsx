@@ -2,10 +2,10 @@
 import "./outer.css";
 import NavigationBar from "@/components/sidebars/NavigationBar";
 import Cart from "@/components/sidebars/Cart";
-import Header from "@/components/layouts/Header";
+import Header from "@/components/Layouts/Header";
 import React from "react";
 import { useState } from "react";
-import Footer from "@/components/layouts/footer";
+import Footer from "@/components/Layouts/footer";
 
 function PageLayout({ children }) {
   const [shownavbar, setshownavbar] = useState(true);
