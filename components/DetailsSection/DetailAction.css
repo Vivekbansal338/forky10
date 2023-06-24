@@ -27,3 +27,7 @@
   border: #fff 1px solid;
   cursor: pointer;
 }
+
+.detail-action__button[disabled] {
+  cursor: not-allowed;
+}

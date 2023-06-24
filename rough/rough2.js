@@ -371,3 +371,33 @@ const orderHistorySlice = createSlice({
 export const orderHistoryActions = orderHistorySlice.actions;
 
 export default orderHistorySlice.reducer;
+
+
+https://drive.google.com/file/d/1-T2ugeZtVgdjzopHlJkqs5X0Unfa-krP/view?usp=sharing, https://drive.google.com/file/d/13BY_HkGB09PRUNDjyu3AW2GAr1zgxtLK/view?usp=sharing, https://drive.google.com/file/d/13RF1Gi5nHWoIQO6u1lJmg7SQtSccZtEh/view?usp=sharing, https://drive.google.com/file/d/13oKEYCrVyKF1ipi6_-X7RkCtAi8SxcCp/view?usp=sharing, https://drive.google.com/file/d/159srJNLhAKf3_pPPlfsU6_hKNBERMjst/view?usp=sharing, https://drive.google.com/file/d/16IDf_Y_Wkui8njeSLtEsfSmrGuEWSIIc/view?usp=sharing, https://drive.google.com/file/d/17CvOawIuqmYnuyA7aJ6i0mSg5o4lU_OW/view?usp=sharing, https://drive.google.com/file/d/17IxnkmGtdQFvQPAs2RLFLK1G4UWVbOIA/view?usp=sharing, https://drive.google.com/file/d/1DcFv5lmu3b_cBkQKVG_mnuvZbcA6EZax/view?usp=sharing, https://drive.google.com/file/d/1G1oN_5Km1YGgkQXMUZcWxYjckGOTHdxy/view?usp=sharing, https://drive.google.com/file/d/1IZgnmKiMvO3SOrjDgIOL4w67OHZy1HkP/view?usp=sharing, https://drive.google.com/file/d/1KiQP_PuLt_2zfSNA7ucfvt72NV0V6wwQ/view?usp=sharing, https://drive.google.com/file/d/1PnLBH2d-J_ocPj6n3zcyDS4q9wfFiSoU/view?usp=sharing, https://drive.google.com/file/d/1Q2phKsckLyIbpopIS4gy4ipEJuBEF5xe/view?usp=sharing, https://drive.google.com/file/d/1QlbpUmg0syLVyWN1R6T3CXK2gvz2SCH5/view?usp=sharing, https://drive.google.com/file/d/1XcUBEf9-k0ZXksKgGIbpn5VhrhhR3EQU/view?usp=sharing, https://drive.google.com/file/d/1e74Nshck48e5nSt95Fbc-q9Fg6JVdl-W/view?usp=sharing, https://drive.google.com/file/d/1k1vj3rTtDdyNlt3qBXeJjNl-kwvaTX6p/view?usp=sharing, https://drive.google.com/file/d/1lqj94IEGKmcA96nQcAwEejiv3jLZU4Hu/view?usp=sharing, https://drive.google.com/file/d/1mwvFbXvu5w6YkDnS1UtUZ7BRfLXDCwvh/view?usp=sharing, https://drive.google.com/file/d/1wEPL_ruItJWeL7YL2P5dSI-YEYMj5Itf/view?usp=sharing, https://drive.google.com/file/d/1w_Iu571_5ptUArKLWFJubVC1-5LaMv9E/view?usp=sharing, https://drive.google.com/file/d/1zu2IOx1nbYJD5k_aCY4wSfAE2zEmM0ln/view?usp=sharing
+
+make a object from above and covert each to do for all of them
+
+https://drive.google.com/uc?export=view&id=YOUR_IMAGE_ID
+
+
+ 
+ 
+  
+   
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    

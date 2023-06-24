@@ -1,276 +1,195 @@
-// "use client";
-// import { useSelector } from "react-redux";
-// import { Pie } from "react-chartjs-2";
-// import { useEffect, useState } from "react";
-// import {
-//   Chart,
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   ArcElement,
-// } from "chart.js";
-
-// Chart.register(CategoryScale, LinearScale, PointElement, ArcElement);
-
-// const SpentAnalysis = () => {
-//   const orders = useSelector((state) => state.orderHistory.orders);
-
-//   // Calculate total amount spent on each recipe
-//   const spentOnRecipes = orders.reduce((acc, order) => {
-//     order.items.forEach((item) => {
-//       if (!acc[item.title]) {
-//         acc[item.title] = 0;
-//       }
-//       acc[item.title] += item.price * item.quantity;
-//     });
-//     return acc;
-//   }, {});
-
-//   // Convert spentOnRecipes object to an array of { title, totalAmount } objects
-//   const spentOnRecipesArray = Object.entries(spentOnRecipes).map(
-//     ([title, totalAmount]) => ({
-//       title,
-//       totalAmount,
-//     })
-//   );
-
-//   // Sort spentOnRecipesArray by totalAmount
-//   spentOnRecipesArray.sort((a, b) => b.totalAmount - a.totalAmount);
-
-//   // Get top 5 recipes by totalAmount
-//   const topRecipes = spentOnRecipesArray.slice(0, 5);
-
-//   // Convert topRecipes to Chart.js data format
-//   const chartData = {
-//     labels: topRecipes.map((recipe) => recipe.title),
-//     datasets: [
-//       {
-//         label: "Total Amount Spent",
-//         data: topRecipes.map((recipe) => recipe.totalAmount),
-//         backgroundColor: [
-//           "rgba(255, 99, 132, 0.2)",
-//           "rgba(54, 162, 235, 0.2)",
-//           "rgba(255, 206, 86, 0.2)",
-//           "rgba(75, 192, 192, 0.2)",
-//           "rgba(153, 102, 255, 0.2)",
-//         ],
-//         borderColor: [
-//           "rgba(255, 99, 132, 1)",
-//           "rgba(54, 162, 235, 1)",
-//           "rgba(255, 206, 86, 1)",
-//           "rgba(75, 192, 192, 1)",
-//           "rgba(153, 102, 255, 1)",
-//         ],
-//         borderWidth: 1,
-//       },
-//     ],
-//   };
-
-//   const [updatedData, setUpdatedData] = useState(chartData);
-
-//   useEffect(() => {
-//     setUpdatedData(chartData);
-//   }, [chartData]);
-
-//   // const options = {
-//   //   plugins: {
-//   //     legend: {
-//   //       position: "bottom",
-//   //     },
-//   //   },
-//   // };
-
-//   const options = {
-//     plugins: {
-//       title: {
-//         display: true,
-//         text: "Top 5 Recipes by Total Amount Spent",
-//         font: {
-//           size: 18,
-//           weight: "bold",
-//         },
-//         position: "top",
-//       },
-//       legend: {
-//         position: "bottom",
-//       },
-//     },
-//   };
-
-//   return (
-//     <div>
-//       <h2>Spent Analysis</h2>
-//       {updatedData && <Pie data={updatedData} options={options} />}
-//     </div>
-//   );
-// };
-
-// export default SpentAnalysis;
-
 "use client";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Bar, Pie } from "react-chartjs-2";
-import { useEffect, useState } from "react";
-import {
-  Chart,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  ArcElement,
-  BarElement, // Add this import for the "Bar" element
-} from "chart.js";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/app/firebase.config";
+import Barspentchart from "@/components/charts/Barspentchart";
+import "./page.css";
 
-Chart.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  ArcElement,
-  BarElement
-); // Register the "Bar" element
+function SpentAnalysis(props) {
+  const user = useSelector((state) => state.userauth.user);
+  const uid = user ? user.uid : null;
+  const [selectedyear, setselectedYear] = useState(-1); // -1 means all years
+  const [yearsavailable, setyearsavailable] = useState(0);
 
-// Rest of the code...
+  const [data, setData] = useState([
+    {
+      name: "Jan",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "Feb",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Mar",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "April",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "May",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "June",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "July",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+    {
+      name: "Aug",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "Sep",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: "Oct",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+    {
+      name: "Nov",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: "Dec",
+      monthlyspent: 0,
+      monthlysavings: 0,
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+  ]);
 
-const SpentAnalysis = () => {
-  const orders = useSelector((state) => state.orderHistory.orders);
-
-  // Calculate total amount spent on each month
-  const monthlySpending = Array(12).fill(0);
-
-  orders.forEach((order) => {
-    const month = new Date(order.date).getMonth();
-    monthlySpending[month] += order.totalAmount;
-  });
-
-  const chartData = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
-    datasets: [
-      {
-        label: "Money Spent",
-        data: monthlySpending,
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const [updatedData, setUpdatedData] = useState(chartData);
+  function handleYearChange(year) {
+    setselectedYear(year);
+  }
 
   useEffect(() => {
-    setUpdatedData(chartData);
-  }, [chartData]);
+    let unsubscribe;
 
-  const barOptions = {
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          precision: 0,
-        },
-      },
-    },
-  };
+    if (uid) {
+      const orderhistoryRef = collection(db, "users", uid, "orderhistory");
+      setData((prevData) =>
+        prevData.map((item) => ({
+          ...item,
+          monthlyspent: 0,
+          monthlysavings: 0,
+        }))
+      );
+      unsubscribe = onSnapshot(orderhistoryRef, (querySnapshot) => {
+        const uniqueYears = new Set();
+        querySnapshot.forEach((doc) => {
+          const historydata = doc.data();
+          const date = historydata.Date.toDate();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+          uniqueYears.add(year);
 
-  // Calculate total amount spent on each recipe
-  const spentOnRecipes = orders.reduce((acc, order) => {
-    order.items.forEach((item) => {
-      if (!acc[item.title]) {
-        acc[item.title] = 0;
+          setData((prevData) =>
+            prevData.map((item, index) => {
+              if (selectedyear === -1) {
+                if (index === month - 1) {
+                  return {
+                    ...item,
+                    monthlyspent:
+                      item.monthlyspent + historydata.totalamountpaid,
+                    monthlysavings:
+                      item.monthlysavings + historydata.discountgiven,
+                  };
+                }
+              } else {
+                if (index === month - 1 && year === selectedyear) {
+                  return {
+                    ...item,
+                    monthlyspent:
+                      item.monthlyspent + historydata.totalamountpaid,
+                    monthlysavings:
+                      item.monthlysavings + historydata.discountgiven,
+                  };
+                }
+              }
+              return item;
+            })
+          );
+        });
+        setyearsavailable(Array.from(uniqueYears).sort((a, b) => b - a));
+      });
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
       }
-      acc[item.title] += item.price * item.quantity;
-    });
-    return acc;
-  }, {});
-
-  // Convert spentOnRecipes object to an array of { title, totalAmount } objects
-  const spentOnRecipesArray = Object.entries(spentOnRecipes).map(
-    ([title, totalAmount]) => ({
-      title,
-      totalAmount,
-    })
-  );
-
-  // Sort spentOnRecipesArray by totalAmount
-  spentOnRecipesArray.sort((a, b) => b.totalAmount - a.totalAmount);
-
-  // Get top 5 recipes by totalAmount
-  const topRecipes = spentOnRecipesArray.slice(0, 5);
-
-  // Convert topRecipes to Chart.js data format
-  const pieChartData = {
-    labels: topRecipes.map((recipe) => recipe.title),
-    datasets: [
-      {
-        label: "Total Amount Spent",
-        data: topRecipes.map((recipe) => recipe.totalAmount),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const [updatedPieData, setUpdatedPieData] = useState(pieChartData);
-
-  useEffect(() => {
-    setUpdatedPieData(pieChartData);
-  }, [pieChartData]);
-
-  const pieOptions = {
-    plugins: {
-      title: {
-        display: true,
-        text: "Top 5 Recipes by Total Amount Spent",
-        font: {
-          size: 18,
-          weight: "bold",
-        },
-        position: "top",
-      },
-      legend: {
-        position: "bottom",
-      },
-    },
-  };
+    };
+  }, [uid, selectedyear]);
 
   return (
-    <div>
-      <h2>Spent Analysis</h2>
-      <div>
-        <h3>Monthly Spending</h3>
-        {updatedData && <Bar data={updatedData} options={barOptions} />}
+    <div className="spent-analysis-container">
+      <div className="page_title_container">
+        <h1 className="page_title">Spent Analysis</h1>
       </div>
-      <div>
-        <h3>Top 5 Recipes by Total Amount Spent</h3>
-        {updatedPieData && <Pie data={updatedPieData} options={pieOptions} />}
+      <div className="charts_container">
+        <div className="monthlyspentbarchart">
+          <Barspentchart
+            data={data}
+            handleYearChange={handleYearChange}
+            yearoptions={yearsavailable}
+          />
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default SpentAnalysis;

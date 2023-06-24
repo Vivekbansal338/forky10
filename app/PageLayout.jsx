@@ -10,6 +10,7 @@ import Footer from "@/components/layouts/footer";
 function PageLayout({ children }) {
   const [shownavbar, setshownavbar] = useState(true);
   const [showcart, setshowcart] = useState(true);
+  const [cartcount, setcartcount] = useState(0);
 
   const handleShowNavBar = () => {
     // e.preventDefault();
@@ -19,17 +20,28 @@ function PageLayout({ children }) {
     // e.preventDefault();
     setshowcart((prev) => !prev);
   };
+
+  const handlecartcount = (count) => {
+    setcartcount(count);
+  };
+
   return (
     <section>
-      <Header onshownavbar={handleShowNavBar} onshowcart={handleShowCart} />
+      <Header
+        onshownavbar={handleShowNavBar}
+        onshowcart={handleShowCart}
+        cartcount={cartcount}
+      />
       <div className="mainbody">
-        {/* <div className="sidebarleft">left-sidebar</div> */}
         <main className="middle">{children}</main>
-        {/* <div className="sidebarright">right-sidebar</div> */}
       </div>
       <Footer />
       <NavigationBar ishidden={shownavbar} onshownavbar={handleShowNavBar} />
-      <Cart ishidden={showcart} onshowcart={handleShowCart} />
+      <Cart
+        ishidden={showcart}
+        onshowcart={handleShowCart}
+        handlecartcount={handlecartcount}
+      />
     </section>
   );
 }

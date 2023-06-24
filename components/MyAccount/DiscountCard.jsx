@@ -7,7 +7,7 @@ import { selectedOrderDetailsSliceActions } from "@/store/selectedorderdetails";
 
 function CouponCard({ coupon, ...props }) {
   const dispatch = useDispatch();
-  const totalamount = useSelector((state) => state.cart.totalAmount);
+  const totalamount = props.totalamount;
 
   const {
     id,

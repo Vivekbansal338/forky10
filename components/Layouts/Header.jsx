@@ -1,7 +1,6 @@
 "use client";
-
 import { useCallback, useRef } from "react";
-import "./header3.css";
+import "./header.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
@@ -10,15 +9,13 @@ import { useDispatch } from "react-redux";
 import { searchResultsActions } from "@/store/searchresults";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-// import pngwing from "./assets/Images/pngwing.png";
-import pngwing from "./pngwing.png";
 
 function Header(props) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userauth.user);
   const searchInputRef = useRef(null);
-  const cartcount = useSelector((state) => state.cart.totalCount);
+  const cartcount = props.cartcount;
   const router = useRouter();
-
   const loggedin = useSelector((state) => state.userauth.user);
 
   const performSearch = useCallback(async () => {
@@ -33,6 +30,7 @@ function Header(props) {
           return;
         }
         dispatch(searchResultsActions.setSearchResults(data.recipes));
+        searchInputRef.current.value = "";
         searchInputRef.current.blur();
       } catch (error) {
         console.log("An error occurred:", error);
@@ -47,6 +45,14 @@ function Header(props) {
     },
     [performSearch]
   );
+
+  const handleshowcart = () => {
+    if (user) {
+      props.onshowcart();
+    } else {
+      router.push("/login");
+    }
+  };
 
   return (
     <header className="header_container">
@@ -85,6 +91,7 @@ function Header(props) {
             src="https://i.ibb.co/frY3nDs/pngwing-png.png"
             alt="profile"
             className="profileimg"
+            onClick={() => router.push("/login")}
           />
         )}
 

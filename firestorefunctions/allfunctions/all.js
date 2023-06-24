@@ -191,6 +191,11 @@ export async function addBookmark(userId, bookmark) {
     "bookmarkData.bookmarks": arrayUnion(bookmark),
   });
 }
+export async function removeBookmark(userId, bookmark) {
+  await updateDoc(doc(collection(db, "users"), userId), {
+    "bookmarkData.bookmarks": arrayRemove(bookmark),
+  });
+}
 // Bookmarks operations end
 //
 //

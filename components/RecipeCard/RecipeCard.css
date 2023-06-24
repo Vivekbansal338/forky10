@@ -99,3 +99,7 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+
+.alreadybookmarked {
+  background-color: #f5b041 !important;
+}

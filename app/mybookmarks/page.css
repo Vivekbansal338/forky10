@@ -1,8 +1,8 @@
 .mybookmark_container {
-  background-color: black;
-  /* background-color: #333333; */
+  /* background-color: black; */
+  background-color: #f5f5f5;
   border: #fff 1px solid;
-  /* padding: 20px; */
+  padding: 20px;
   border-radius: 20px;
   overflow: hidden;
   display: flex;
@@ -13,6 +13,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  color: #000;
 }
 
 .container_title {
@@ -25,12 +26,11 @@
 }
 
 .container_title h2 {
-  color: #fff;
   font-size: 2rem;
   font-weight: 400;
   text-align: center;
   margin-left: 2rem;
-  font-size: bold;
+  font-weight: 700;
 }
 .container_title button {
   background-color: #fff;

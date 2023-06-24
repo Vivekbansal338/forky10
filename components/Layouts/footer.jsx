@@ -47,7 +47,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; 2021 Food Recipes. All rights reserved.</p>
+        <p>&copy; 2023 Food Recipes. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -1,23 +1,65 @@
-import React from "react";
-import "./Cart.css";
+"use client";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { collection, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Cartitem from "../Cart/Cartitem";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import { db } from "@/app/firebase.config.js";
+import { cartActions } from "@/store/cart";
+import "./Cart.css";
 
 function Cart(props) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userauth.user);
+  const uid = user ? user.uid : null;
   const router = useRouter();
-  const classNames = `cart-overlay ${props.ishidden ? "hidden" : ""}`;
-  const cart = useSelector((state) => state.cart);
-  const totalamount = cart.totalAmount;
-  const totalquantity = cart.totalCount;
-  const cartitems = cart.data;
+
+  const [totalamount, settotalamount] = useState(0);
+  const [totalquantity, settotalquantity] = useState(0);
+  const [cartitems, setcartitems] = useState([]);
 
   const handlerouter = () => {
     props.onshowcart();
     router.push(`/checkout`);
   };
+
+  useEffect(() => {
+    let unsubscribe;
+
+    if (uid) {
+      const cartRef = collection(db, "users", uid, "cartdata");
+      unsubscribe = onSnapshot(cartRef, (querySnapshot) => {
+        const cart = [];
+        querySnapshot.forEach((doc) => {
+          if (doc.id === "carttotals") {
+            settotalamount(doc.data().totalamount);
+            settotalquantity(doc.data().totalcount);
+            props.handlecartcount(doc.data().totalcount);
+          } else {
+            cart.push(doc.data());
+          }
+        });
+        setcartitems(cart);
+        dispatch(
+          cartActions.updateCartData({
+            cartitems: cartitems,
+            totalamount: totalamount,
+            totalquantity: totalquantity,
+          })
+        );
+      });
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [uid]);
+
+  const classNames = `cart-overlay ${props.ishidden ? "hidden" : ""}`;
 
   return (
     <div className={classNames}>
@@ -51,11 +93,7 @@ function Cart(props) {
 
 export default Cart;
 
-//
-//
-//
-//
-//
+// code for redux store
 // import React, { useState, useEffect } from "react";
 // import "./Cart.css";
 // import { FaTimes } from "react-icons/fa";

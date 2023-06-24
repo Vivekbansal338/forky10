@@ -1,19 +1,59 @@
 "use client";
-
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { collection, doc, onSnapshot, deleteDoc } from "firebase/firestore";
+import { db } from "@/app/firebase.config";
 import RecipeCard from "@/components/RecipeCard/RecipeCard";
 import "./page.css";
-import { useSelector } from "react-redux";
-import { BookmarkActions } from "@/store/bookmark";
-import { useDispatch } from "react-redux";
-function Mybookmarks() {
-  const dispatch = useDispatch();
-  const bookmarkData = useSelector((state) => state.bookmarkData.bookmarks);
 
-  const clearbookmarks = (e) => {
-    console.log("clearing bookmarks");
-    e.preventDefault();
-    dispatch(BookmarkActions.clearBookmarks());
-    console.log(bookmarkData);
+function MyBookmarks() {
+  const dispatch = useDispatch();
+  const [bookmarkData, setBookmarkData] = useState([]);
+  const user = useSelector((state) => state.userauth.user);
+  const uid = user ? user.uid : null;
+
+  useEffect(() => {
+    let unsubscribe;
+
+    if (uid) {
+      const bookmarkCollectionRef = collection(
+        db,
+        "users",
+        uid,
+        "bookmarkdata"
+      );
+      unsubscribe = onSnapshot(bookmarkCollectionRef, (querySnapshot) => {
+        const bookmarks = [];
+        querySnapshot.forEach((doc) => {
+          const bookmark = doc.data();
+          bookmarks.push(bookmark);
+        });
+        setBookmarkData(bookmarks);
+      });
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [uid, bookmarkData]);
+
+  const clearBookmarks = async () => {
+    try {
+      const bookmarkCollectionRef = collection(
+        db,
+        "users",
+        uid,
+        "bookmarkdata"
+      );
+      const querySnapshot = await getDocs(bookmarkCollectionRef);
+      querySnapshot.forEach(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+    } catch (error) {
+      console.error("Error clearing bookmarks:", error);
+    }
   };
 
   return (
@@ -21,17 +61,18 @@ function Mybookmarks() {
       <div className="container_title">
         <h2>My Bookmarks</h2>
         {bookmarkData.length > 0 && (
-          <button onClick={clearbookmarks}>Clear Bookmarks</button>
+          <button onClick={clearBookmarks}>Clear Bookmarks</button>
         )}
       </div>
       <div className="mybookmark_container_items">
-        {bookmarkData.map((bookmark) => (
-          <RecipeCard
-            key={bookmark.recipe_id}
-            data={{ ...bookmark, price: bookmark.image_url.length }}
-          />
-        ))}
-        {bookmarkData.length === 0 && (
+        {bookmarkData.length > 0 ? (
+          bookmarkData.map((bookmark) => (
+            <RecipeCard
+              key={bookmark.recipe_id}
+              data={{ ...bookmark, price: bookmark.image_url.length }}
+            />
+          ))
+        ) : (
           <h1 className="nobookmark">No Bookmark data</h1>
         )}
       </div>
@@ -39,4 +80,4 @@ function Mybookmarks() {
   );
 }
 
-export default Mybookmarks;
+export default MyBookmarks;

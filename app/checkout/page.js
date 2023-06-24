@@ -7,12 +7,21 @@ import Cartitem from "../../components/cart/Cartitem";
 import DeliveryCard from "../../components/MyAccount/DeliveryCard";
 import DiscountCard from "../../components/MyAccount/DiscountCard";
 import PaymentCard from "../../components/MyAccount/PaymentCard";
-import { useState } from "react";
+import { clearcart } from "@/firestorefunctions/allfunctionsnew";
+import { useState, useEffect } from "react";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { db } from "@/app/firebase.config";
 import React from "react";
 import "./page.css";
 
 function Checkout() {
+  const [totalamount, settotalamount] = useState(0);
+  const [totalquantity, settotalquantity] = useState(0);
+  const [cartitems, setcartitems] = useState([]);
+  const [deliverydata, setDeliverydata] = useState([]);
+  const [paymentdata, setPaymentdata] = useState([]);
   const user = useSelector((state) => state.userauth.user);
+  const uid = user ? user.uid : null;
   const dispatch = useDispatch();
   const router = useRouter();
   const [showcards, setShowCards] = useState({
@@ -20,10 +29,6 @@ function Checkout() {
     deliveryaddresses: false,
     discountcoupons: false,
   });
-
-  const cart = useSelector((state) => state.cart);
-  const delivery = useSelector((state) => state.delivery.addresses);
-  const cards = useSelector((state) => state.payment.cards);
   const coupons = useSelector((state) => state.discount.coupons);
   const appliedCoupon = useSelector(
     (state) => state.selectedOrderDetails.discountCouponDetails
@@ -35,46 +40,114 @@ function Checkout() {
     (state) => state.selectedOrderDetails.deliveryDetails
   );
 
-  const totalAmount = cart.totalAmount;
-  const totalQuantity = cart.totalCount;
-  const cartItems = cart.data;
-  const appliedCouponRate = appliedCoupon ? appliedCoupon.discountRate : 0;
-  const appliedCouponMaxDiscount = appliedCoupon
-    ? appliedCoupon.maximumDiscountAmount
-    : 0;
-  const finalDiscount = Math.min(
-    Math.round(appliedCouponRate * totalAmount),
-    appliedCouponMaxDiscount
-  );
-  const finalTotalAmount = Math.round(
-    totalAmount - Math.min(finalDiscount, appliedCouponMaxDiscount)
-  );
+  useEffect(() => {
+    let unsubscribe;
+
+    if (uid) {
+      const cartRef = collection(db, "users", uid, "cartdata");
+      unsubscribe = onSnapshot(cartRef, (querySnapshot) => {
+        const cart = [];
+        let totalamount = 0;
+        let totalquantity = 0;
+        querySnapshot.forEach((doc) => {
+          if (doc.id === "carttotals") {
+            totalamount = doc.data().totalamount;
+            totalquantity = doc.data().totalcount;
+          } else {
+            cart.push(doc.data());
+          }
+        });
+        settotalamount(totalamount);
+        settotalquantity(totalquantity);
+        setcartitems(cart);
+      });
+
+      const PaymentCollectionRef = collection(
+        db,
+        "users",
+        uid,
+        "PaymentCarddata"
+      );
+      unsubscribe = onSnapshot(PaymentCollectionRef, (querySnapshot) => {
+        const paymentcards = [];
+        querySnapshot.forEach((doc) => {
+          const paymentcard = doc.data();
+          paymentcards.push(paymentcard);
+        });
+        setPaymentdata(paymentcards);
+      });
+
+      const DeliveryCollectionRef = collection(
+        db,
+        "users",
+        uid,
+        "deliverydata"
+      );
+      unsubscribe = onSnapshot(DeliveryCollectionRef, (querySnapshot) => {
+        const deliverycards = [];
+        querySnapshot.forEach((doc) => {
+          const deliverycard = doc.data();
+          deliverycards.push(deliverycard);
+        });
+        setDeliverydata(deliverycards);
+      });
+    }
+
+    return () => {
+      if (unsubscribe) {
+        unsubscribe();
+      }
+    };
+  }, [uid]);
 
   const handleCards = (type) => {
     setShowCards((prevState) => ({ ...prevState, [type]: !prevState[type] }));
   };
 
+  const calculateFinalDiscount = () => {
+    const appliedCouponRate = appliedCoupon ? appliedCoupon.discountRate : 0;
+    const appliedCouponMaxDiscount = appliedCoupon
+      ? appliedCoupon.maximumDiscountAmount
+      : 0;
+    return Math.min(
+      Math.round(appliedCouponRate * totalamount),
+      appliedCouponMaxDiscount
+    );
+  };
+
+  const calculateFinalTotalAmount = (finalDiscount) => {
+    const appliedCouponMaxDiscount = appliedCoupon
+      ? appliedCoupon.maximumDiscountAmount
+      : 0;
+    return Math.round(
+      totalamount - Math.min(finalDiscount, appliedCouponMaxDiscount)
+    );
+  };
+
   const placeFinalOrder = (e) => {
     e.preventDefault();
-    dispatch(cartActions.emptycart(user.uid));
-    dispatch(
-      orderHistoryActions.addOrder({
-        items: [...cartItems],
+    const finalDiscount = calculateFinalDiscount();
+    const finaltotalamount = calculateFinalTotalAmount(finalDiscount);
+    console.log(new Date(Math.floor(Math.random() * Date.now())));
+    const start = new Date("2020-01-01").getTime();
+    const end = new Date("2023-12-31").getTime();
+
+    const orderhistoryref = addDoc(
+      collection(db, "users", uid, "orderhistory"),
+      {
+        Date: new Date(),
+        // Date: new Date(Math.floor(Math.random() * (end - start + 1)) + start),
+        items: [...cartitems],
         appliedCoupon: appliedCoupon,
         paymentdetails: appliedPaymentCard,
         deliverydetails: appliedDeliveryAddress,
-        totalAmount: finalTotalAmount,
-        discount: finalDiscount,
-      })
+        totalamountpaid: finaltotalamount,
+        discountgiven: finalDiscount,
+      }
     );
-    // console.log({
-    //   items: [...cartItems],
-    //   appliedCoupon: appliedCoupon,
-    //   paymentdetails: appliedPaymentCard,
-    //   deliverydetails: appliedDeliveryAddress,
-    // });
+
     router.push("/");
-    alert("Order Placed Successfully");
+    clearcart(uid);
   };
 
   return (
@@ -84,7 +157,7 @@ function Checkout() {
           <h2>Order Summary</h2>
         </div>
         <div className="order_container_items">
-          {cartItems.map((item) => (
+          {cartitems.map((item) => (
             <Cartitem key={item.recipe_id} item={item} />
           ))}
         </div>
@@ -121,7 +194,7 @@ function Checkout() {
         </div>
         {showcards.deliveryaddresses && (
           <div className="delivery_container_items">
-            {delivery.map((address) => (
+            {deliverydata.map((address) => (
               <DeliveryCard
                 key={address.id}
                 address={address}
@@ -148,7 +221,7 @@ function Checkout() {
         </div>
         {showcards.paymentcards && (
           <div className="payment_container_items">
-            {cards.map((card) => (
+            {paymentdata.map((card) => (
               <PaymentCard
                 key={card.cardNumber}
                 card={card}
@@ -169,17 +242,17 @@ function Checkout() {
           <h2>Place Order</h2>
         </div>
         <div className="placeorder_container_items">
-          {totalQuantity > 0 && (
+          {totalquantity > 0 && (
             <div className="placeorder-card">
               <h2 className="placeorder-card-title">Order Summary</h2>
               <div className="placeorder-card-content">
                 <p>
                   <span className="placeorder-card-label">Price:</span>{" "}
-                  {totalAmount}
+                  {totalamount}
                 </p>
                 <p>
                   <span className="placeorder-card-label">Quantity:</span>{" "}
-                  {totalQuantity}
+                  {totalquantity}
                 </p>
                 <p>
                   <span className="placeorder-card-label">
@@ -189,11 +262,11 @@ function Checkout() {
                 </p>
                 <p>
                   <span className="placeorder-card-label">Discount:</span>
-                  {finalDiscount}
+                  {calculateFinalDiscount()}
                 </p>
                 <p className="placeorder-card-total">
                   <span className="placeorder-card-label">Total Amount:</span>{" "}
-                  {finalTotalAmount}
+                  {calculateFinalTotalAmount(calculateFinalDiscount())}
                 </p>
               </div>
 
@@ -208,7 +281,7 @@ function Checkout() {
             </div>
           )}
         </div>
-        {totalQuantity === 0 && <h1 className="empty">Cart Empty !</h1>}
+        {totalquantity === 0 && <h1 className="empty">Cart Empty !</h1>}
         {!appliedDeliveryAddress && (
           <h1 className="empty">Please Select Delivery Address</h1>
         )}

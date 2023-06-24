@@ -2,35 +2,32 @@
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import React, { useState } from "react";
 import "./cartitem.css";
-import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { cartActions } from "@/store/cart";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-const recipetempData = {
-  image_url:
-    "http://forkify-api.herokuapp.com/images/best_pizza_dough_recipe1b20.jpg",
-  publisher: "101 Cookbooks",
-  publisher_url: "http://www.101cookbooks.com",
-  recipe_id: "47746",
-  social_rank: 100,
-  source_url: "http://www.101cookbooks.com/archives/001199.html",
-  title: "Best Pizza Dough Ever",
-};
+import {
+  addtocart,
+  removefromcart,
+} from "@/firestorefunctions/allfunctionsnew";
+
 function Cartitem(props) {
-  const uid = useSelector((state) => state.userauth.user.uid);
+  const user = useSelector((state) => state.userauth.user);
+  const uid = user ? user.uid : null;
   const router = useRouter();
-  const dispatch = useDispatch();
   const { image_url, title, price, quantity, recipe_id } = props.item;
 
   const handleadditem = (e) => {
     e.preventDefault();
-    dispatch(cartActions.addtocart({ uid: uid, data: props.item }));
+    const cartData = {
+      ...props.item,
+      price: parseFloat(props.item.image_url.length) || 100,
+      quantity: 1,
+    };
+    addtocart(uid, cartData, recipe_id);
   };
 
   const handleremoveitem = (e) => {
     e.preventDefault();
-    dispatch(cartActions.removefromcart({ uid: uid, data: props.item }));
+    removefromcart(uid, recipe_id);
   };
 
   const handlerouter = (e) => {
@@ -68,10 +65,6 @@ function Cartitem(props) {
               onClick={handleadditem}
             />
           </button>
-
-          {/* <Link href={`/searchresults/`}>
-            <span className="cartitem-check">Check</span>
-          </Link> */}
         </div>
       </div>
     </div>
