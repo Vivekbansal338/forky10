@@ -1,11 +1,11 @@
 "use client";
 import "./outer.css";
 import NavigationBar from "@/components/sidebars/NavigationBar";
-import Cart from "@/components/sidebars/Cart";
-import Header from "@/components/layouts/Header";
+import Cart from "../components/sidebars/Cart";
+import Header from "../components/layouts/Header";
 import React from "react";
 import { useState } from "react";
-import Footer from "@/components/layouts/footer";
+import Footer from "../components/layouts/footer";
 
 function PageLayout({ children }) {
   const [shownavbar, setshownavbar] = useState(true);
