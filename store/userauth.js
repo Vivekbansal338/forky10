@@ -21,8 +21,18 @@ import {
 } from "firebase/auth";
 
 const initialState = {
-  user: JSON.parse(localStorage.getItem("user")) || null,
+  user: null,
 };
+
+if (typeof window !== "undefined") {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) {
+    initialState.user = JSON.parse(storedUser);
+  }
+}
+// const initialState = {
+//   user: JSON.parse(localStorage.getItem("user")) || null,
+// };
 
 const authSlice = createSlice({
   name: "auth",
