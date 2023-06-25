@@ -1,6 +1,5 @@
 .mybookmark_container {
-  /* background-color: black; */
-  background-color: #f5f5f5;
+  background-color: #fffaf0;
   border: #fff 1px solid;
   padding: 20px;
   border-radius: 20px;
@@ -23,6 +22,7 @@
   justify-content: space-between;
   margin-bottom: 20px;
   padding: 10px 20px;
+  color: #000;
 }
 
 .container_title h2 {
@@ -44,7 +44,7 @@
   transition: all 0.3s ease-in-out;
   font-size: 16px;
   font-weight: 700;
-  border: #fff 1px solid;
+  border: black 1px solid;
 }
 
 .container_title button:hover {

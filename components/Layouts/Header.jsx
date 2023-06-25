@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 import { searchResultsActions } from "@/store/searchresults";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 
 function Header(props) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.userauth.user);
+  // const user = useSelector((state) => state.userauth.user);
   const searchInputRef = useRef(null);
   const cartcount = props.cartcount;
   const router = useRouter();
@@ -47,11 +49,15 @@ function Header(props) {
   );
 
   const handleshowcart = () => {
-    if (user) {
+    if (loggedin) {
       props.onshowcart();
     } else {
       router.push("/login");
     }
+  };
+
+  const handleLogin = () => {
+    router.push("/login");
   };
 
   return (
@@ -95,10 +101,39 @@ function Header(props) {
           />
         )}
 
-        <button className="sidebar_button_right" onClick={props.onshowcart}>
+        <button className="sidebar_button_right" onClick={handleshowcart}>
           <AiOutlineShoppingCart className="right_cart_icon" />
-          {cartcount > 0 && <span className="cartcount">{cartcount}</span>}
+          {loggedin && cartcount > 0 && (
+            <span className="cartcount">{cartcount}</span>
+          )}
         </button>
+
+        {/* <div className="header_login_slidedown">
+          <div className="header_login_slidedown_container">
+            {loggedin && showDropdown && (
+              <div className="dropdown_content">
+                <div className="dropdown_item" onClick={handleLogout}>
+                  <span> Logout</span>
+                  <span>
+                    {" "}
+                    <FiLogOut />{" "}
+                  </span>
+                </div>
+              </div>
+            )}
+            {!loggedin && showDropdown && (
+              <div className="dropdown_content">
+                <div className="dropdown_item" onClick={handleLogin}>
+                  <span> Login</span>
+                  <span>
+                    {" "}
+                    <FiLogIn />{" "}
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div> */}
       </div>
     </header>
   );

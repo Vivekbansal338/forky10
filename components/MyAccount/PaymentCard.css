@@ -5,8 +5,6 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-  /* border: #fff solid 1px; */
-  /* color: #fff; */
   color: black;
   background-color: #fff;
 }
@@ -152,11 +150,11 @@
 }
 
 .selectedfront {
-  background-color: #f5f5f5;
+  background-color: #f3e6de;
   color: black;
 }
 
 .selectedback {
-  background-color: #f5f5f5;
   color: black;
+  background-color: #f3e6de;
 }

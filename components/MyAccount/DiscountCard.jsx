@@ -4,9 +4,15 @@ import "./DiscountCard.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { selectedOrderDetailsSliceActions } from "@/store/selectedorderdetails";
+import { useState } from "react";
 
 function CouponCard({ coupon, ...props }) {
   const dispatch = useDispatch();
+  const selectedcoupon = useSelector(
+    (state) => state.selectedOrderDetails.discountCouponDetails
+  );
+  const selectedid = selectedcoupon ? selectedcoupon.id : null;
+  // const [selectedid, setSelectedid] = useState(null);
   const totalamount = props.totalamount;
 
   const {
@@ -19,7 +25,6 @@ function CouponCard({ coupon, ...props }) {
   } = coupon;
 
   const applydiscountcoupon = () => {
-    console.log("apply discount coupon");
     dispatch(
       selectedOrderDetailsSliceActions.setDiscountCouponDetails({
         discountRate: discountRate,
@@ -53,7 +58,7 @@ function CouponCard({ coupon, ...props }) {
         }`}
         onClick={applydiscountcoupon}
       >
-        Apply
+        {selectedid && selectedid === id ? "Applied" : "Apply"}
       </button>
     </div>
   );

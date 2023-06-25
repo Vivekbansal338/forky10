@@ -173,6 +173,7 @@ function Checkout() {
               <DiscountCard
                 key={coupon.id}
                 coupon={coupon}
+                totalamount={totalamount}
                 selected={
                   appliedCoupon && coupon.id === appliedCoupon.id
                     ? "selected"

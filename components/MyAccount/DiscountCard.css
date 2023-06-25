@@ -63,11 +63,12 @@
 }
 
 .apply-button.disabled {
+  pointer-events: none;
   cursor: not-allowed;
 }
 
 .selected {
-  background-color: black;
-  color: #fff;
-  border: #fff solid 1px;
+  /* background-color: black; */
+  background-color: #fffaf0;
+  /* border: #fff solid 1px; */
 }
