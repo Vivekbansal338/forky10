@@ -22,7 +22,6 @@
   justify-content: space-between;
   margin-bottom: 20px;
   padding: 10px 20px;
-  color: #000;
 }
 
 .container_title h2 {
@@ -31,6 +30,7 @@
   text-align: center;
   margin-left: 2rem;
   font-weight: 700;
+  color: #000;
 }
 .container_title button {
   background-color: #fff;
